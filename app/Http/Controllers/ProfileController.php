@@ -68,9 +68,9 @@ class ProfileController extends Controller
     // edit profil pakar
     public function index2()
     {
-        $provincies = Province::all();
+        $provinces = Province::all();
         $regencies = Regency::all();
-        return view('pakar.profilepakar-edit', compact('provincies', 'regencies'));
+        return view('pakar.profilepakar-edit', compact('provinces', 'regencies'));
     }
     public function update2(Request $request)
     {

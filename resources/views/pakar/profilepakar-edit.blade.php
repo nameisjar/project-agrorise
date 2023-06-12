@@ -9,7 +9,8 @@
     <meta name="author" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>AgroRise - Login Main</title>
+
+    <title>AgroRise</title>
 
     <!-- CSS FILES -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,37 +25,53 @@
 
     <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
     <script>
         $(function() {
-
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+
             $('#provincy').on('change', function() {
                 let id_provinces = $('#provincy').val();
 
                 $.ajax({
                     type: 'POST',
-                    url: "{{ route('getregency') }}",
+                    url: "{{ route('getregency-edit') }}",
                     data: {
                         id_provinces: id_provinces
                     },
                     cache: false,
-
-                    success: function(msg) {
-                        $('#regency').html(msg);
+                    success: function(options) {
+                        $('#regency').html(options);
                     },
-
                     error: function(data) {
                         console.log('error:', data);
                     },
                 })
             })
-
         });
     </script>
+
+    <style>
+        .form-select {
+            width: 85%;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 5px;
+            width: 85%;
+            border: 2px solid #f6f6f6;
+            background-color: #fff;
+            border-bottom: 2px solid #c7973e;
+        }
+    </style>
 </head>
 
 <body>
@@ -82,11 +99,11 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-lg-auto me-lg-4">
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="{{route('index')}}">Beranda</a>
+                            <a class="nav-link click-scroll" href="{{ route('index') }}">Beranda</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="{{route('course')}}">Kursus</a>
+                            <a class="nav-link click-scroll" href="{{ route('course') }}">Kursus</a>
                         </li>
 
                         <li class="nav-item dropdown">
@@ -281,25 +298,21 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="row mb-3">
+                                    <div class="row mb-4">
                                         <div class="col-sm-3">
                                             <h6 class="mb-0">Provinsi</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            <div class="dropdown-alamat">
-                                                <div class="select @error('Provincy') is-invalid @enderror">
-                                                    <span>Pilih Provinsi</span>
-                                                    <i class="fa fa-chevron-left"></i>
-                                                </div>
-                                                <input type="hidden" id="Provincy" name="Provincy">
-                                                <ul class="dropdown-alamat-menu">
-                                                    @foreach ($provincies as $provincy)
-                                                        <li data-value="{{ $provincy->id }}">{{ $provincy->name }}
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
-                                            </div>
-                                            @error('Provincy')
+                                            <select name="Provincy" id="provincy" required
+                                                class="form-select @error('provincy') is-invalid @enderror"
+                                                aria-label="Default select example">
+                                                <option value="">Pilih salah satu provinsi...</option>
+                                                @foreach ($provinces as $province)
+                                                    <option value="{{ $province->id }}">{{ $province->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            @error('provincy')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
                                                 </div>
@@ -307,24 +320,16 @@
                                         </div>
                                     </div>
 
-                                    <div class="row mb-3">
+                                    <div class="row mb-4">
                                         <div class="col-sm-3">
                                             <h6 class="mb-0">Kabupaten</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            <div class="dropdown-alamat">
-                                                <div class="select @error('regency') is-invalid @enderror">
-                                                    <span>Pilih Kabupaten</span>
-                                                    <i class="fa fa-chevron-left"></i>
-                                                </div>
-                                                <input type="hidden" id="regency" name="regencies_id">
-                                                <ul class="dropdown-alamat-menu">
-                                                    @foreach ($regencies as $regency)
-                                                        <li data-value="{{ $regency->id }}">{{ $regency->name }}
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
-                                            </div>
+                                            <select name="regencies_id" id="regency" required
+                                                class="form-select @error('regency') is-invalid @enderror"
+                                                aria-label="Default select example">
+                                                <option value="">Pilih salah satu Kabupaten...</option>
+                                            </select>
                                             @error('regency')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
@@ -385,38 +390,6 @@
                 imgPreview.src = oFREvent.target.result;
             }
         }
-    </script>
-
-    <script>
-        $(document).ready(function() {
-            /* Dropdown Menu */
-            $('.dropdown-alamat').click(function() {
-                $(this).attr('tabindex', 1).focus();
-                $(this).toggleClass('active');
-                $(this).find('.dropdown-alamat-menu').slideToggle(300);
-            });
-
-            $('.dropdown-alamat').focusout(function() {
-                $(this).removeClass('active');
-                $(this).find('.dropdown-alamat-menu').slideUp(300);
-            });
-
-            $('.dropdown-alamat .dropdown-alamat-menu li').click(function() {
-                var value = $(this).data('value');
-                var text = $(this).text();
-
-                $(this).parents('.dropdown-alamat').find('span').text(text);
-                $(this).parents('.dropdown-alamat').find('input').val(value);
-            });
-            /* End Dropdown-alamat Menu */
-
-            $('.dropdown-alamat-menu li').click(function() {
-                var input = '<strong>' + $(this).parents('.dropdown-alamat').find('input').val() +
-                    '</strong>';
-                var msg = '<span class="msg">Hidden input value: ';
-                $('.msg').html(msg + input + '</span>');
-            });
-        });
     </script>
 
 </body>

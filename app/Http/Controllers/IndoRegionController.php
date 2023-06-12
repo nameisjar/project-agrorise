@@ -11,10 +11,26 @@ class IndoRegionController extends Controller
     {
         $id_provinces = $request->id_provinces;
 
-        $regences = Regency::where('province_id', $id_provinces)->get();
+        $regencies = Regency::where('province_id', $id_provinces)->get();
 
-        foreach ($regences as $regency) {
-            echo "<option value=' $regency->id '> $regency->name </option>";
+        $options = '<option value="">Pilih salah satu Kabupaten...</option>';
+        foreach ($regencies as $regency) {
+            $options .= "<option value='{$regency->id}'>{$regency->name}</option>";
         }
+
+        return $options;
+    }
+    public function getregency1(Request $request)
+    {
+        $id_provinces = $request->id_provinces;
+
+        $regencies = Regency::where('province_id', $id_provinces)->get();
+
+        $options = '<option value="">Pilih salah satu Kabupaten...</option>';
+        foreach ($regencies as $regency) {
+            $options .= "<option value='{$regency->id}'>{$regency->name}</option>";
+        }
+
+        return $options;
     }
 }

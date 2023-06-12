@@ -42,9 +42,9 @@ class SignupController extends Controller
     // buat akun pakar
     public function index2()
     {
-        $provincies = Province::all();
+        $provinces = Province::all();
         $regencies = Regency::all();
-        return view('sesi.signup-pakar', compact('provincies', 'regencies'));
+        return view('sesi.signup-pakar', compact('provinces', 'regencies'));
     }
     public function store2(Request $request)
     {

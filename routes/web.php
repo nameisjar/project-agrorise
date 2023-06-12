@@ -91,6 +91,7 @@ route::group(['middleware' => ['auth:user,pakar,admin']], function () {
     // pembayaran kursus
     route::post('/detail-pembayaran', [CourseController::class, 'checkout'])->name('detail-pembayaran');
     route::get('/invoice/{id}', [CourseController::class, 'invoice']);
+    Route::post('/getregency-edit', [IndoRegionController::class, 'getregency1'])->name('getregency-edit');
 
 
 });

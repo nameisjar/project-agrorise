@@ -124,7 +124,8 @@
                                             <h6 class="text-success">Pendaftaran Disetujui</h6>
                                         @elseif(Auth::guard('pakar')->user()->status === 'Ditolak')
                                             <h6 class="text-danger">Pendaftaran Tidak Disetujui</h6>
-                                            <p>Silahkan Daftar Ulang CV dan Sertifikat Anda <a href="/cv-sertifikat">disini</a></p>
+                                            <p>Silahkan Daftar Ulang CV dan Sertifikat Anda <a
+                                                    href="/cv-sertifikat">disini</a></p>
                                         @else
                                             <p class="text-warning">Menunggu persetujuan admin</p>
                                         @endif
@@ -215,20 +216,20 @@
                                 @foreach ($regencies as $prov)
                                     <div class="row mb-3">
                                         <div class="col-sm-3">
-                                            <h6 class="mb-0">Kabupaten</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary">
-                                            <input readonly type="text" class="form-control"
-                                                value="{{ $prov->name }}">
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-sm-3">
                                             <h6 class="mb-0">Provinsi</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
                                             <input readonly type="text" class="form-control"
                                                 value="{{ $prov->province->name }}">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Kabupaten</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            <input readonly type="text" class="form-control"
+                                                value="{{ $prov->name }}">
                                         </div>
                                     </div>
                                 @endforeach

@@ -25,17 +25,17 @@
 
     <link href="{{ asset('css/signupPakar.css') }}" rel="stylesheet">
 
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
     <script>
         $(function() {
-
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+
             $('#provincy').on('change', function() {
                 let id_provinces = $('#provincy').val();
 
@@ -46,19 +46,33 @@
                         id_provinces: id_provinces
                     },
                     cache: false,
-
-                    success: function(msg) {
-                        $('#regency').html(msg);
+                    success: function(options) {
+                        $('#regency').html(options);
                     },
-
                     error: function(data) {
                         console.log('error:', data);
                     },
                 })
             })
-
         });
     </script>
+
+    <style>
+        .form-select {
+            background-color: #f6f6f6;
+            color: #0d0d0d;
+            padding: 10px 10px;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 5px;
+            width: 85%;
+            border: 2px solid #f6f6f6;
+            transition: all 0.5s ease-in-out;
+            border-radius: 5px 5px 5px 5px;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -87,11 +101,11 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-lg-auto me-lg-4">
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="{{route('index')}}">Beranda</a>
+                            <a class="nav-link click-scroll" href="{{ route('index') }}">Beranda</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="{{route('course')}}">Kursus</a>
+                            <a class="nav-link click-scroll" href="{{ route('course') }}">Kursus</a>
                         </li>
 
                         <li class="nav-item dropdown">
@@ -111,7 +125,7 @@
                     </ul>
 
                     <div class="d-none d-lg-block">
-                        <a href="#" class="btn custom-btn custom-border-btn btn-naira btn-inverted">
+                        <a href="/login" class="btn custom-btn custom-border-btn btn-naira btn-inverted">
                             <i class="btn-icon bi-cloud-download"></i>
                             <span>Masuk</span><!-- duplicated above one for mobile -->
                         </a>
@@ -196,7 +210,7 @@
                         @enderror
                         <input type="text" id="instansi"
                             class="fadeIn third @error('instansi') is-invalid @enderror" name="instansi"
-                            placeholder="Instansi" >
+                            placeholder="Instansi">
                         @error('instansi')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -204,41 +218,38 @@
                         @enderror
 
 
-                        <div class="dropdown-alamat">
-                            <div class="select @error('Provincy') is-invalid @enderror">
-                                <span>Pilih Provinsi</span>
-                                <i class="fa fa-chevron-left"></i>
-                            </div>
-                            <input type="hidden" id="Provincy" name="Provincy">
-                            <ul class="dropdown-alamat-menu">
-                                @foreach ($provincies as $provincy)
-                                    <li data-value="{{ $provincy->id }}">{{ $provincy->name }}</li>
+                        <div class="my-2">
+                            {{-- <label for="provincy" class="form-label">Provinsi</label> --}}
+                            <select name="Provincy" id="provincy" required
+                                class="form-select @error('provincy') is-invalid @enderror"
+                                aria-label="Default select example">
+                                <option value="">Pilih salah satu provinsi...</option>
+                                @foreach ($provinces as $province)
+                                    <option value="{{ $province->id }}">{{ $province->name }}</option>
                                 @endforeach
-                            </ul>
+                            </select>
+                            @error('provincy')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
-                        @error('Provincy')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
 
-                        <div class="dropdown-alamat">
-                            <div class="select @error('regency') is-invalid @enderror">
-                                <span>Pilih Kabupaten</span>
-                                <i class="fa fa-chevron-left"></i>
-                            </div>
-                            <input type="hidden" id="regency" name="regencies_id">
-                            <ul class="dropdown-alamat-menu">
-                                @foreach ($regencies as $regency)
-                                    <li data-value="{{ $regency->id }}">{{ $regency->name }}</li>
-                                @endforeach
-                            </ul>
+                        <div class="mb-2">
+                            {{-- <label for="regency" class="form-label">Kabupaten</label> --}}
+                            <select name="regencies_id" id="regency" required
+                                class="form-select @error('regency') is-invalid @enderror"
+                                aria-label="Default select example">
+                                <option value="">Pilih salah satu Kabupaten...</option>
+                            </select>
+                            @error('regency')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
-                        @error('regency')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+
+
                         <input type="text" id="alamat"
                             class="fadeIn third @error('alamat') is-invalid @enderror" name="alamat"
                             placeholder="Alamat" required>
@@ -258,7 +269,7 @@
                         </label>
                         <label>Portofolio (format dalam bentuk .pdf)<br><input type="file" id="Sertifikat"
                                 class="fadeIn third @error('Sertifikat') is-invalid @enderror" name="sertifikat"
-                                placeholder="Sertifikat" accept=".pdf" >
+                                placeholder="Sertifikat" accept=".pdf">
                             @error('Sertifikat')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -305,7 +316,7 @@
         });
     </script>
 
-    <script>
+    {{-- <script>
         $(document).ready(function() {
             /* Dropdown Menu */
             $('.dropdown-alamat').click(function() {
@@ -335,7 +346,7 @@
                 $('.msg').html(msg + input + '</span>');
             });
         });
-    </script>
+    </script> --}}
 
 
 </body>
