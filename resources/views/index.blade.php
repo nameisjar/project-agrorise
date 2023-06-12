@@ -47,13 +47,12 @@
                     <span>AgroRise</span>
                 </a>
 
-                <div class="d-lg-none ms-auto me-3">
-                    <a href="#" class="btn custom-btn custom-border-btn btn-naira btn-inverted">
+                {{-- <div class="d-lg-none ms-auto me-3">
+                    <a href="/login" class="btn custom-btn custom-border-btn btn-naira btn-inverted">
                         <i class="btn-icon bi-cloud-download"></i>
-                        <span>Masuk</span><!-- duplicated another one below for mobile -->
+                        <span href="{{ route('login') }}">Masuk</span><!-- duplicated another one below for mobile -->
                     </a>
-                </div>
-
+                </div> --}}
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -150,6 +149,13 @@
                             </ul>
                         </div>
                     @else
+                        <div class="d-lg-none ms-auto me-3">
+                            <a href="/login" class="btn custom-btn custom-border-btn btn-naira btn-inverted">
+                                <i class="btn-icon bi-cloud-download"></i>
+                                <span href="{{ route('login') }}">Masuk</span>
+                                <!-- duplicated another one below for mobile -->
+                            </a>
+                        </div>
                         <div class="d-none d-lg-block">
                             <a href="/login" class="btn custom-btn custom-border-btn btn-naira btn-inverted">
                                 <i class="btn-icon bi-cloud-download"></i>

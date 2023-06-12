@@ -37,9 +37,10 @@
                 </a>
 
                 <div class="d-lg-none ms-auto me-3">
-                    <a href="#" class="btn custom-btn custom-border-btn btn-naira btn-inverted">
+                    <a href="/login" class="btn custom-btn custom-border-btn btn-naira btn-inverted">
                         <i class="btn-icon bi-cloud-download"></i>
-                        <span>Masuk</span><!-- duplicated another one below for mobile -->
+                        <span href="{{ route('login') }}">Masuk</span>
+                        <!-- duplicated another one below for mobile -->
                     </a>
                 </div>
 

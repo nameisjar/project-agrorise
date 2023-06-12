@@ -31,6 +31,19 @@
 
     <link href="{{ asset('css/video.css') }}" rel="stylesheet">
 
+    <style>
+        body {
+            background-image: url('../images/bg23.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            /* position: relative;
+            padding-top: 50px;
+            height: 100vh;
+            z-index: 79;
+            display: flex; */
+        }
+    </style>
 </head>
 
 <body>
@@ -42,13 +55,6 @@
                     <i class="navbar-brand-icon bi-book me-2"></i>
                     <span>AgroRise</span>
                 </a>
-
-                <div class="d-lg-none ms-auto me-3">
-                    <a href="#" class="btn custom-btn custom-border-btn btn-naira btn-inverted">
-                        <i class="btn-icon bi-cloud-download"></i>
-                        <span>Masuk</span><!-- duplicated another one below for mobile -->
-                    </a>
-                </div>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

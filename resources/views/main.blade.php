@@ -17,11 +17,11 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 
-    <link href="{{asset('css/bootstrap-icons.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap-icons.css') }}" rel="stylesheet">
 
-    <link href="{{asset('css/logmain.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/logmain.css') }}" rel="stylesheet">
     <!--
 
 
@@ -40,9 +40,10 @@
                 </a>
 
                 <div class="d-lg-none ms-auto me-3">
-                    <a href="#" class="btn custom-btn custom-border-btn btn-naira btn-inverted">
+                    <a href="/login" class="btn custom-btn custom-border-btn btn-naira btn-inverted">
                         <i class="btn-icon bi-cloud-download"></i>
-                        <span>Masuk</span><!-- duplicated another one below for mobile -->
+                        <span href="{{ route('login') }}">Masuk</span>
+                        <!-- duplicated another one below for mobile -->
                     </a>
                 </div>
 
@@ -54,11 +55,11 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-lg-auto me-lg-4">
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="{{route('index')}}">Beranda</a>
+                            <a class="nav-link click-scroll" href="{{ route('index') }}">Beranda</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="{{route('course')}}">Kursus</a>
+                            <a class="nav-link click-scroll" href="{{ route('course') }}">Kursus</a>
                         </li>
 
                         <li class="nav-item dropdown">
@@ -94,8 +95,8 @@
 
                     <!-- Login Form -->
                     <form>
-                        <a href="{{route('daftar')}}"><input type="button" class="fadeIn fourth" value="Daftar"></a>
-                        <a href="{{route('login')}}"><input type="button" class="fadeIn fourth" value="Login"></a>
+                        <a href="{{ route('daftar') }}"><input type="button" class="fadeIn fourth" value="Daftar"></a>
+                        <a href="{{ route('login') }}"><input type="button" class="fadeIn fourth" value="Login"></a>
                     </form>
 
 
