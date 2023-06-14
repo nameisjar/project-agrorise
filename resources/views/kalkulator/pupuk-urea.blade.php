@@ -22,11 +22,14 @@
     <link href="{{ asset('css/bootstrap-icons.css') }}" rel="stylesheet">
 
     <link href="{{ asset('css/kalkulator.css') }}" rel="stylesheet">
-    <!--
 
 
-
--->
+    <style>
+        .output-field {
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+        }
+    </style>
 </head>
 
 <body>
@@ -180,24 +183,29 @@
 
                                     <div class="col-md-6 form-group mb-3">
                                         <label for="" class="col-form-label">Luas Lahan</label>
-                                        <input type="number" class="form-control" id="luas"><br>
+                                        <input type="number" class="form-control" id="luas"
+                                            placeholder="Masukkan Luas Tanah" autofocus><br>
+                                        <label for="budget" class="col-form-label">Pilih Luas Tanah
+                                            (Ha/m²)</label>
                                         <select id="selector" onchange="getselect()">
                                             <option value="hektar">Hektar</option>
-                                            <option value="meter">m*2</option>
+                                            <option value="meter">m²</option>
                                         </select>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12 form-group mb-3">
                                             <label for="budget" class="col-form-label">Dosis per hektar
                                                 (Kg/Ha)</label>
-                                            <output class="form-control" id="dosis1"></output>
+                                            <output class="form-control output-field" id="dosis1"
+                                                style="padding-right: 10px; padding-left: 10px;"></output>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12 form-group mb-3">
                                             <label for="budget" class="col-form-label">Dosis per meter
-                                                (g/m*2)</label>
-                                            <output class="form-control" id="dosis2"></output>
+                                                (g/m²)</label>
+                                            <output class="form-control output-field" id="dosis2"
+                                                style="padding-right: 10px; padding-left: 10px;"></output>
                                         </div>
                                     </div>
                                     <div class="row justify-content-center">
@@ -260,6 +268,9 @@
                 dosis1.value = Number(luas.value) * 150;
             }
             note.style.display = "block";
+            document.getElementById("luas").value = ""; // Reset nilai input "luas"
+            document.getElementById("selector").selectedIndex = 0; // Reset pilihan pada elemen "selector"
+            document.getElementById("luas").focus(); // Berikan fokus otomatis ke input "luas"
         }
     </script>
 

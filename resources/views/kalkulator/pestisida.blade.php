@@ -175,9 +175,9 @@
                                 <div class="row">
                                     <div class="col-md-6 form-group mb-3">
                                         <label for="" class="col-form-label">Konsentrasi Aplikasi
-                                            (ml/L)</label>
+                                            (mililiter per liter)</label>
                                         <div class="input-group">
-                                            <input type="number" class="form-control" id="consent" required
+                                            <input type="number" class="form-control" id="consent" required autofocus
                                                 style="padding-right: 20px; padding-left: 20px;">
                                             <div class="input-group-append">
                                                 <span class="input-group-text">ml/L</span>
@@ -185,7 +185,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6 form-group mb-3">
-                                        <label for="" class="col-form-label">Luas Lahan (m)</label>
+                                        <label for="" class="col-form-label">Luas Lahan (meter)</label>
                                         <div class="input-group">
                                             <input type="number" class="form-control" id="luas" required
                                                 style="padding-right: 20px; padding-left: 20px;">
@@ -195,7 +195,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6 form-group mb-3">
-                                        <label for="" class="col-form-label">Kapasitas Tangki (L)</label>
+                                        <label for="" class="col-form-label">Kapasitas Tangki (liter)</label>
                                         <div class="input-group">
                                             <input type="number" class="form-control" id="vtangki" required
                                                 style="padding-right: 20px; padding-left: 20px;">
@@ -206,7 +206,7 @@
                                     </div>
                                     <div class="col-md-6 form-group mb-3">
                                         <label for="budget" class="col-form-label">Volume Aplikasi/Semprot
-                                            (L/Ha)</label>
+                                            (liter/hektar)</label>
                                         <div class="input-group">
                                             <input type="number" class="form-control" id="vsemprot" required
                                                 style="padding-right: 20px; padding-left: 20px;">
@@ -241,6 +241,13 @@
                                     <div class="col-md-12 form-group mb-3">
                                         <label for="budget" class="col-form-label">Banyak tangki yang
                                             diperlukan</label>
+                                        <output class="form-control output-field" id="ctangki"
+                                            style="padding-right: 10px; padding-left: 10px;"></output>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 form-group mb-3">
+                                        <label for="budget" class="col-form-label">Atau jika dibulatkan</label>
                                         <output class="form-control output-field" id="btangki"
                                             style="padding-right: 10px; padding-left: 10px;"></output>
                                     </div>
@@ -315,6 +322,7 @@
             dosis.value = Number(consent.value) * Number(vsemprot.value) / 1000;
             vpestisida.value = Number(consent.value) * Number(vtangki.value);
             vair.value = Number(vsemprot.value) * Number(luas.value) / 10000;
+            ctangki.value = Number(vair.value) / Number(vtangki.value) + " Tangki" ;
             btangki.value = Math.round(Number(vair.value) / Number(vtangki.value)) + " Tangki";
             vinsektisida.value = Number(dosis.value) * Number(luas.value) / 10000 * 1000;
             note.style.display = "block";
